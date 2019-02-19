@@ -1,15 +1,16 @@
 package rocks.zipcode.atm;
 
+import javafx.scene.control.*;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.layout.FlowPane;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import java.util.Optional;
 
 /**
  * @author ZipCodeWilmington
@@ -54,7 +55,13 @@ public class CashMachineApp extends Application {
             cashMachine.exit();
 
             areaInfo.setText(cashMachine.toString());
+
+
         });
+
+        JFrame parent = new JFrame();
+
+       // JOptionPane.showMessageDialog(parent, "Account is over drafted");
 
         FlowPane flowpane = new FlowPane();
 
@@ -62,6 +69,7 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
+
         vbox.getChildren().addAll(field, flowpane, areaInfo);
         return vbox;
     }
@@ -71,6 +79,22 @@ public class CashMachineApp extends Application {
         stage.setScene(new Scene(createContent()));
         stage.show();
     }
+
+    private void onActionAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About...");
+        alert.setHeaderText(null);
+        alert.setContentText("Author: Guduche\nVersion: 1.0.1");
+        alert.getButtonTypes().clear();
+        ButtonType boutonOk = new ButtonType("Ok");
+        alert.getButtonTypes().add(boutonOk);
+        ButtonType boutonGithub = new ButtonType("Github project");
+        alert.getButtonTypes().add(boutonGithub);
+        Optional<ButtonType> result = alert.showAndWait();
+
+
+        }
+
 
     public static void main(String[] args) {
         launch(args);
